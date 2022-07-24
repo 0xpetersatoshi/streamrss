@@ -5,7 +5,7 @@ services:
     image: postgres:12.11
     restart: always
     environment:
-      POSTGRES_DB: postgres
+      POSTGRES_DB: feeds
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
