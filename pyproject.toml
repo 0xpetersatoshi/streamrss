@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "rss-feed-streamer"
+name = "streamrss"
 version = "0.1.0"
 description = "RSS feed streamer"
 authors = ["0xPeterSatoshi <0xpetersatoshi@gmail.com>"]
@@ -18,3 +18,6 @@ asyncio = "^3.4.3"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+streamrss = "streamrss.main:main"
