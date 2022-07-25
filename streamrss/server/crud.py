@@ -1,4 +1,3 @@
-from ast import pattern
 from sqlalchemy.orm import Session
 from streamrss.server import models, schemas
 
