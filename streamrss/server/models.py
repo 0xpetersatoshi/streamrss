@@ -11,4 +11,4 @@ class Rules(Base):
     pattern = Column(String)
     tag = Column(String)
     time_created = Column(DateTime(timezone=True), server_default=func.now())
-    time_updated = Column(DateTime(timezone=True), onupdate=func.now())
+    time_updated = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())

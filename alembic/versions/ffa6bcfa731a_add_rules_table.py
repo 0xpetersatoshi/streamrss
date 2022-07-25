@@ -1,8 +1,8 @@
 """add rules table
 
-Revision ID: 02e1086149a8
+Revision ID: ffa6bcfa731a
 Revises: 
-Create Date: 2022-07-24 12:05:46.052524
+Create Date: 2022-07-24 17:04:22.775263
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '02e1086149a8'
+revision = 'ffa6bcfa731a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,7 +23,7 @@ def upgrade() -> None:
     sa.Column('pattern', sa.String(), nullable=True),
     sa.Column('tag', sa.String(), nullable=True),
     sa.Column('time_created', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
-    sa.Column('time_updated', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('time_updated', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_rules_id'), 'rules', ['id'], unique=False)
