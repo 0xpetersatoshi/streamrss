@@ -89,6 +89,29 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "asyncio-nats-client"
+version = "0.11.5"
+description = "NATS client for Python Asyncio"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+nkeys = ["nkeys"]
+
+[[package]]
+name = "asyncio-nats-streaming"
+version = "0.4.0"
+description = "NATS Streaming client for Python Asyncio"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+asyncio-nats-client = ">=0.7.0"
+protobuf = ">=3.7"
+
+[[package]]
 name = "attrs"
 version = "21.4.0"
 description = "Classes Without Boilerplate"
@@ -352,9 +375,28 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "nats-py"
+version = "2.1.4"
+description = "NATS client for Python"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+nkeys = ["nkeys"]
+
+[[package]]
 name = "orjson"
 version = "3.7.8"
 description = "Fast, correct Python JSON library supporting dataclasses, datetimes, and numpy"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
+name = "protobuf"
+version = "4.21.4"
+description = ""
 category = "main"
 optional = false
 python-versions = ">=3.7"
@@ -638,7 +680,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "0a9f4b47b6f0c8d6944ea193a899ec5c81f7ad159920368906791b8f7db05a04"
+content-hash = "a9bebfb54adfeeb1ad43e9759db87217afd255acc506f2fc99fc1b0ae95f21b6"
 
 [metadata.files]
 aiohttp = [
@@ -727,6 +769,8 @@ async-timeout = [
     {file = "async_timeout-4.0.2-py3-none-any.whl", hash = "sha256:8ca1e4fcf50d07413d66d1a5e416e42cfdf5851c981d679a09851a6853383b3c"},
 ]
 asyncio = []
+asyncio-nats-client = []
+asyncio-nats-streaming = []
 attrs = [
     {file = "attrs-21.4.0-py2.py3-none-any.whl", hash = "sha256:2d27e3784d7a565d36ab851fe94887c5eccd6a463168875832a1be79c82828b4"},
     {file = "attrs-21.4.0.tar.gz", hash = "sha256:626ba8234211db98e869df76230a137c4c40a12d72445c45d5f5b716f076e2fd"},
@@ -934,7 +978,9 @@ multidict = [
     {file = "multidict-6.0.2-cp39-cp39-win_amd64.whl", hash = "sha256:4bae31803d708f6f15fd98be6a6ac0b6958fcf68fda3c77a048a4f9073704aae"},
     {file = "multidict-6.0.2.tar.gz", hash = "sha256:5ff3bd75f38e4c43f1f470f2df7a4d430b821c4ce22be384e1459cb57d6bb013"},
 ]
+nats-py = []
 orjson = []
+protobuf = []
 psycopg2 = []
 pydantic = []
 python-dotenv = []
