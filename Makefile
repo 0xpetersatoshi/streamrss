@@ -1,13 +1,13 @@
 install:
 	@poetry install
 
-start-db:
+start-services:
 	@docker-compose up -d
 
 run-migrations:
 	@poetry run alembic upgrade head
 
-start-server: start-db run-migrations
+start-server: start-services run-migrations
 	@poetry run uvicorn streamrss.server.app:app --reload
 
 destroy:
