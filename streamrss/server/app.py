@@ -1,4 +1,5 @@
 import os
+import uuid
 
 import nats
 import uvicorn
@@ -58,7 +59,7 @@ async def message_stream(request: Request):
                 async for msg in sub.messages:
                     data = msg.data.decode()
                     print(f"Received a message on '{msg.subject}': {data}")
-                    yield {"event": FEED_SUBSCRIPTION_SUBJECT, "data": data}
+                    yield {"id": uuid.uuid4().hex, "event": FEED_SUBSCRIPTION_SUBJECT, "data": data}
             except Exception as e:
                 print(str(e))
 
