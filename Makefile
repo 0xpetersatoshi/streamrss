@@ -1,8 +1,11 @@
-install: start-services
+install: create-env-file start-services
 	@poetry install
 
 start-services:
 	@docker-compose up -d --build
+
+create-env-file:
+	@cp .env.example .env
 
 run-migrations:
 	@poetry run alembic upgrade head
