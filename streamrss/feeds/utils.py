@@ -48,7 +48,7 @@ def write_bookmark(state: dict, feed_id: str, val: str) -> dict:
     return state
 
 
-def get_bookmark(state: dict, feed_id: str) -> dict:
+def get_bookmark(state: dict, feed_id: str) -> str:
     """Get a bookmark from the state object.
     
     :param state: A dictionary holding a datestring bookmark for a feed

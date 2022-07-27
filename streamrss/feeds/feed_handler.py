@@ -1,4 +1,5 @@
-from streamrss.feeds import FEEDS, utils
+from streamrss.feeds import utils
+from streamrss.feeds.feeds import FEEDS
 
 
 class FeedHandler:
@@ -21,13 +22,21 @@ class FeedHandler:
         for feed in FEEDS:
             # Get the latest bookmark for each feed object and pass it
             # to the object to filter for feeds newer than the bookmark datetime
+
+            # Get bookmark, if doesn't exist for a feed
+            # create a default bookmark and get it again
+            # TODO: fix this logic
             bookmark = utils.get_bookmark(state, feed)
+            if not bookmark:
+                state = utils.write_bookmark(state, feed, state.get("start_date", "2022-07-01"))
+                bookmark = utils.get_bookmark(state, feed)
             feed_obj = FEEDS[feed](bookmark)
             yield from feed_obj.get_filtered_entries()
 
             # Get the latest bookmark and update the state object
             bookmark = feed_obj.get_bookmark()
-            self.set_state(utils.write_bookmark(state, feed, bookmark))
+            state = utils.write_bookmark(state, feed, bookmark)
+            self.set_state(state)
 
     def set_state(self, state: dict):
         self.state = state

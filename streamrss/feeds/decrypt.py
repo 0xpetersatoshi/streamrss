@@ -9,6 +9,7 @@ class Decrypt(BaseFeed):
     """
 
     feed_url: str = "https://decrypt.co/feed"
+    feed_name: str = "decrypt"
     entries = None
 
     def get_entries(self) -> list:

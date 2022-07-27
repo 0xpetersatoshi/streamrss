@@ -7,6 +7,7 @@ class Blockworks(BaseFeed):
     """
 
     feed_url: str = "https://blockworks.co/feed"
+    feed_name: str = "blockworks"
 
     def get_entries(self) -> list:
         self.parse()
