@@ -22,6 +22,7 @@ async def main(state: dict):
     js = nc.jetstream()
 
     # Persist messages to a subject
+    print(f"adding new stream: {FEED_SUBSCRIPTION_SUBJECT}")
     await js.add_stream(name="feed-stream", subjects=[FEED_SUBSCRIPTION_SUBJECT])
 
     print(f"initial state: {state}")
