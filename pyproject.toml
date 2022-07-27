@@ -32,3 +32,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 streamrss = "streamrss.main:main"
+worker = "streamrss.feeds:main"
