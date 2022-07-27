@@ -44,6 +44,13 @@ services:
     depends_on:
       - db
 
+  worker:
+    build: ./
+    entrypoint: ./worker-entrypoint.sh
+    restart: always
+    networks:
+      - app
+
 networks:
   app:
     driver: bridge

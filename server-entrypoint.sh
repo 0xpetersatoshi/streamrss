@@ -2,6 +2,9 @@
 
 set -x
 
+echo "sleep for 10 seconds to ensure db is up and ready"
+sleep 10
+
 echo "applying migrations..."
 poetry run alembic upgrade head
 

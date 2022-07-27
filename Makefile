@@ -1,8 +1,8 @@
-install:
+install: start-services
 	@poetry install
 
 start-services:
-	@docker-compose up -d
+	@docker-compose up -d --build
 
 run-migrations:
 	@poetry run alembic upgrade head

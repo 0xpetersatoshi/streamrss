@@ -10,7 +10,8 @@ COPY alembic.ini ./
 COPY alembic ./alembic
 COPY Makefile ./
 COPY .env ./
-COPY entrypoint.sh ./
+COPY server-entrypoint.sh ./
+COPY worker-entrypoint.sh ./
 COPY streamrss/ ./streamrss
 
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT [ "./server-entrypoint.sh" ]
