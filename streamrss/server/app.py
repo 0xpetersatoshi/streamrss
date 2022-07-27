@@ -1,4 +1,6 @@
+import json
 import os
+import re
 import uuid
 
 import nats
@@ -36,6 +38,9 @@ async def rule():
 
 @app.get('/stream')
 async def message_stream(request: Request):
+    # Get list of rules to filter records for
+    rules = db.session.query(models.Rules).all()
+
     # Connect to nats server
     nc = await nats.connect(NATS_SERVER_URL)
 
@@ -50,10 +55,18 @@ async def message_stream(request: Request):
                 break
 
             try:
+                # Loop through messages in jetsream
                 async for msg in sub.messages:
                     data = msg.data.decode()
                     print(f"Received a message on '{msg.subject}': {data}")
-                    yield {"id": uuid.uuid4().hex, "event": FEED_SUBSCRIPTION_SUBJECT, "data": data}
+                    # Loop through the rules and use regex to see if record matches a rule
+                    # If there is a match, emit the event
+                    for rule in rules:
+                        content = json.loads(data)["content"]
+                        m = re.search(rule["pattern"], content)
+                        if m:
+                            event_id = f"{FEED_SUBSCRIPTION_SUBJECT}::{uuid.uuid4().hex}"
+                            yield {"id": event_id, "event": rule["tag"], "data": data}
             except Exception as e:
                 print(str(e))
 
