@@ -31,14 +31,8 @@ def rule(rule: schemas.RulesCreate):
 
 @app.get('/stream/rules')
 async def rule():
-    rule = db.session.query(models.Rules).all()
-    return {"rules": rule}
-
-def get_messages(pubsub):
-    while True:
-        message = pubsub.get_message()
-        if message:
-            yield message
+    rules = db.session.query(models.Rules).all()
+    return {"rules": rules}
 
 @app.get('/stream')
 async def message_stream(request: Request):
