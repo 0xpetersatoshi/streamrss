@@ -42,5 +42,20 @@ def add(pattern, tag):
     print(json.dumps(response.json(), indent=2))
 
 
+@click.command()
+@click.option("-i", "--rule-id", type=int, required=True, help="The rule ID to delete")
+def delete(rule_id):
+    delete_url = f"{URL}/{rule_id}"
+    response = requests.delete(delete_url)
+    try:
+        response.raise_for_status()
+    except Exception as e:
+        print(f"Error deleting rule with id={rule_id}: {e}")
+
+    print(f"Rule ID={rule_id} successfully deleted")
+    print(json.dumps(response.json(), indent=2))
+
+
 rules.add_command(list, "list")
 rules.add_command(add, "add")
+rules.add_command(delete, "delete")

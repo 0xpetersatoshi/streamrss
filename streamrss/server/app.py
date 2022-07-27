@@ -6,7 +6,7 @@ import uuid
 import nats
 import uvicorn
 from dotenv import load_dotenv
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi_sqlalchemy import DBSessionMiddleware, db
 from sse_starlette.sse import EventSourceResponse
 from streamrss.server import crud, models, schemas
@@ -35,6 +35,15 @@ def rule(rule: schemas.RulesCreate):
 async def rule():
     rules = db.session.query(models.Rules).all()
     return {"rules": rules}
+
+@app.delete('/stream/rules/{rule_id}')
+async def rule(rule_id: int):
+    rule = db.session.get(models.Rules, rule_id)
+    if not rule:
+        raise HTTPException(status_code=404, detail="rule not found")
+    db.session.delete(rule)
+    db.session.commit()
+    return {"ok": True}
 
 @app.get('/stream')
 async def message_stream(request: Request):
