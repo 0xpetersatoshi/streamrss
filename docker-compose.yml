@@ -12,6 +12,8 @@ services:
       - streamrss:/var/lib/postgresql/data
     ports:
       - 5432:5432
+    networks:
+      - app
 
   nats:
     image: nats:2.8-linux
@@ -29,6 +31,22 @@ services:
       - 4222:4222
       - 6222:6222
       - 8222:8222
+    networks:
+      - app
+
+  api:
+    build: ./
+    restart: always
+    ports:
+      - 8000:8000
+    networks:
+      - app
+    depends_on:
+      - db
+
+networks:
+  app:
+    driver: bridge
 
 volumes:
   streamrss:
