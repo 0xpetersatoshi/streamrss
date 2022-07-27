@@ -11,7 +11,7 @@ BASE_DIR= os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 # TODO: use env vars instead of hardcoding
-NATS_SERVER_URL = "nats://localhost:4222"
+NATS_SERVER_URL = "nats://nats:4222"
 FEED_SUBSCRIPTION_SUBJECT = 'feed.events'
 
 
