@@ -35,7 +35,11 @@ class Decrypt(BaseFeed):
         with requests.Session() as session:
             print(f"making GET request for URL: {entry.link}")
             response = session.get(entry.link)
-            response.raise_for_status()
+            try:
+                response.raise_for_status()
+            except Exception as e:
+                print(f"Error: {e}")
+                print("Skipping entry")
             soup = BeautifulSoup(response.text, "html5lib")
             content = soup.find_all("div", {"class": "z-2"})
             entry["content"] = str(content)
