@@ -4,9 +4,10 @@ import os
 import nats
 from dotenv import load_dotenv
 
-load_dotenv('.env')
+BASE_DIR= os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
-NATS_SERVER_URL = os.environ['NATS_SERVER_URL']
+NATS_SERVER_URL = "nats://localhost:4222"
 FEED_SUBSCRIPTION_SUBJECT = os.environ['FEED_SUBSCRIPTION_SUBJECT']
 
 async def main():
