@@ -54,6 +54,16 @@ Options:
   --help              Show this message and exit.
 ```
 
+Here are some examples:
+
+```{bash}
+streamrss rules add --pattern ".*((Ethereum)|(ETH)).*((fork)|(upgrad)).*" --tag "ethereum-forks-or-upgrades"
+
+streamrss rules add --pattern ".*((Coinbase)|(Binance)).*list.*" --tag "coinbase-binance-listings"
+
+streamrss rules add --pattern ".*((hack)|(exploit)|(vuln))" --tag "hack-and-vulnerabilities" 
+```
+
 `streamrss rules list` will simply list any existing rules and their corresponding `id`. If you want to delete a rule, you can run `streamrss rules delete --rule-id <ID>` to delete it.
 
 ### Stream
